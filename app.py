@@ -27,41 +27,33 @@ def set_background(png_file):
     ''' % bin_str
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
-set_background(r"7129.jpg")
+set_background(r"coronavirus-infection-background-with-copy-space.jpg")
 
 st.markdown("----")
 
 if rfr_model is not None:
-    # Add a section header
     st.header("Input Data")
 
-    # Get user input for overall economic activity and employment
     overall = st.number_input("Enter overall economic activity from each sector:", min_value=0)
     employment = st.number_input("Enter employment (in thousands):", min_value=0)
 
-    # Check if the "Predict" button is clicked
     if st.button("Predict GDP"):
         # Create an input array
         input_data = array([[overall, employment]])
 
-        # Make a prediction
         prediction = rfr_model.predict(input_data)[0]
 
-        # Display the prediction result
         st.header("Prediction Result")
-        st.write(f"Predicted GDP: ${prediction:,.2f}")  # Format the prediction as currency
+        st.write(f"Predicted GDP: ${prediction:,.2f}")
 
-    # Add a section for customizing the app
     st.sidebar.header("App Customization")
 
-    # Add an option to change the background image
     new_bg_image = st.sidebar.file_uploader("Change Background Image (PNG or JPG)", type=["png", "jpg"])
     if new_bg_image:
         with open("custom_bg.png", "wb") as f:
             f.write(new_bg_image.read())
         set_background("custom_bg.png")
 
-    # Add a section for additional information
     st.sidebar.header("About")
     st.sidebar.write("This app predicts a country's GDP based on user-provided data.")
     st.sidebar.write("Model: Random Forest Regressor")
