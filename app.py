@@ -55,7 +55,8 @@ if rfr_model is not None:
         set_background("custom_bg.png")
 
     st.sidebar.header("About")
-    st.sidebar.write("This app predicts a country's GDP based on user-provided data.")
+    st.sidebar.write("This app predicts a country's GDP for year 2021 based on user-provided data.")
+    st.sidebar.write("It takes user input as 'Total Economy(in trillions)' and 'Employment(in thousands)'")
     st.sidebar.write("Model: Random Forest Regressor")
 
 else:
